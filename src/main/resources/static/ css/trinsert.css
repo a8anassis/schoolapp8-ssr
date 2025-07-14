@@ -1,0 +1,47 @@
+.outer-content {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    min-height: 45vh;
+    width: 80vw;
+}
+
+form {
+    width: 70vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*border: 1px solid black;*/
+}
+
+.m-bottom {
+    margin-bottom: 10px;
+}
+
+.m-top {
+    margin-top: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+}
+
+input[type=text] {
+    height: 18px;
+}
+
+#region {
+    height: 24px;
+}
+
+.error {
+    color: red;
+}

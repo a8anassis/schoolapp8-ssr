@@ -1,0 +1,65 @@
+:root {
+    --color-white: #fff;
+    --color-blue-300: rgb(0, 101, 179);
+    --color-blue-dark: rgb(0, 51, 117);
+    --color-yellow: rgb(255, 221, 36);
+    --color-dark: #000;
+}
+
+.outer {
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-blue-dark);
+    color: var(--color-white);
+    font-family: Arial, sans-serif;
+}
+
+.items {
+    width: 60%;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.login-name {
+    width: 40%;
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    margin-right: 15px;
+    color: var(--color-white)
+}
+
+
+.login-name a {
+    background-color: var(--color-yellow);
+    color: var(--color-dark);
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.login-name > span {
+    margin-right: 15px;
+}
+
+.line {
+    background-color: var(--color-blue-300);
+    height: 8px;
+}
+
+.title, .login-name {
+    font-size: 1.8rem;
+}
+
+.gov-gr-logo {
+    height: 58px;
+    width: auto;
+}
+
+.items img {
+    vertical-align: middle;
+}

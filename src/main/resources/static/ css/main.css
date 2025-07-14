@@ -1,0 +1,35 @@
+/* Define CSS variables */
+:root {
+    --green-color: #006736; /* Green */
+    --green-color-hover: #218838; /* Darker Green */
+    --light-color: #e8e8f2; /* Light Background */
+    --dark-color: #343a40; /* Dark Text */
+    --dark-blue: #3b3b97;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    padding: 20px;
+    text-align: center;
+    min-height: 70vh;
+}
+
+.custom-button-green {
+    background-color: var(--green-color);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block; /* Allows padding to work correctly on <a> */
+}
+
+.custom-button-green:hover {
+    background-color: var(--green-color-hover);
+}

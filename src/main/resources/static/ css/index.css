@@ -1,0 +1,67 @@
+.hero-section {
+/*
+linear-gradient — makes a smooth color transition.
+135deg — the angle of the gradient, meaning the gradient goes diagonally from top-left to bottom-right (135 degrees clockwise from the horizontal).
+#6a11cb 0% — start color at 0% (top-left corner): a purple shade.
+#2575fc 100% — end color at 100% (bottom-right corner): a bright blue shade.
+*/
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 5rem 0;
+    margin-bottom: 3rem;
+    border-radius: 0 0 20px 20px;
+}
+
+.action-card {
+/* When transform changes, animate it smoothly over 0.3 seconds using the ease timing function. */
+/* When box-shadow changes, animate it similarly over 0.3 seconds. */
+/* he ease timing function in CSS transitions makes the animation start slowly, then speed up in the middle, and slow down again toward the end */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    /* Ensures content doesn’t spill outside rounded corners. */
+    overflow: hidden;
+    /* Makes the card fill the height of its container */
+    height: 100%;
+}
+
+.action-card:hover {
+/* On hover, moves the card up by 10 pixels for a "lift" effect. */
+    transform: translateY(-10px);
+    /* horizontal vertical blur black with opacity 0.1*/
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #2575fc;
+}
+
+.btn-custom {
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom {
+    background-color: #2575fc;
+    border-color: #2575fc;
+}
+
+.btn-primary-custom:hover {
+    background-color: #1a5dc8;
+    border-color: #1a5dc8;
+}
+
+.btn-success-custom {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success-custom:hover {
+    background-color: #218838;
+    border-color: #218838;
+}

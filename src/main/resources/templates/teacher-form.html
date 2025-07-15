@@ -23,11 +23,11 @@
         <div th:if="${errorMessage}" class="error">
             <p th:text="${errorMessage}"></p>
         </div>
-        <form method="POST" th:object="${teacherInsertDTO}">
+        <form method="POST" th:action="/teachers/insert" th:object="${teacherInsertDTO}">
             <div class="row">
                 <div>
                     <label for="firstname">First Name:</label><br>
-                    <input type="text" id="firstname" name="firstname" th:field="*{firstname}"/>
+                    <input type="text" id="firstname" th:field="*{firstname}"/>
                     <div th:if="${#fields.hasErrors('firstname')}">
                         <p th:classappend="${#fields.hasErrors('firstname')} ? 'error'" th:errors="*{firstname}"></p>
                     </div>

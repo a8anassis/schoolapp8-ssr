@@ -3,6 +3,7 @@ package gr.aueb.cf.schoolapp.service;
 import gr.aueb.cf.schoolapp.core.exceptions.EntityAlreadyExistsException;
 import gr.aueb.cf.schoolapp.core.exceptions.EntityInvalidArgumentException;
 import gr.aueb.cf.schoolapp.dto.TeacherInsertDTO;
+import gr.aueb.cf.schoolapp.dto.TeacherReadOnlyDTO;
 import gr.aueb.cf.schoolapp.mapper.Mapper;
 import gr.aueb.cf.schoolapp.model.Teacher;
 import gr.aueb.cf.schoolapp.model.static_data.Region;
@@ -12,12 +13,17 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j  // log
 public class TeacherService implements ITeacherService {
+
+
     private final TeacherRepository teacherRepository;
     private final RegionRepository regionRepository;
     private final Mapper mapper;
@@ -30,7 +36,7 @@ public class TeacherService implements ITeacherService {
 //    }
 
     @Override
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional(rollbackOn = { EntityInvalidArgumentException.class, EntityAlreadyExistsException.class })
     public Teacher saveTeacher(TeacherInsertDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException {
         try {
@@ -53,6 +59,15 @@ public class TeacherService implements ITeacherService {
             log.error("Save failed for teacher with vat={}. Region id={} invalid.", dto.getVat(), dto.getRegionId(), e);
             throw e;
         }
+    }
+
+
+    @Override
+    @Transactional
+    public Page<TeacherReadOnlyDTO> getPaginatedTeachers(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Teacher> teacherPage = teacherRepository.findAll(pageable);
+        return teacherPage.map(mapper::mapToTeacherReadOnlyDTO);
     }
 
 }

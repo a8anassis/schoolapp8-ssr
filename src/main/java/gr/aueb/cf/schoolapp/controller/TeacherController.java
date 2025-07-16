@@ -61,7 +61,7 @@ public class TeacherController {
             savedTeacher = teacherService.saveTeacher(teacherInsertDTO);
             TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(savedTeacher);
             redirectAttributes.addFlashAttribute("teacher", readOnlyDTO);
-            return "redirect:/school/teachers";
+            return "redirect:/school/teachers/view";
         } catch (EntityAlreadyExistsException | EntityInvalidArgumentException e) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
             model.addAttribute("errorMessage", e.getMessage());

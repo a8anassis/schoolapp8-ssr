@@ -23,7 +23,7 @@
         <div th:if="${errorMessage}" class="error">
             <p th:text="${errorMessage}"></p>
         </div>
-        <form method="POST" th:action="/teachers/insert" th:object="${teacherInsertDTO}">
+        <form method="POST" th:object="${teacherInsertDTO}">
             <div class="row">
                 <div>
                     <label for="firstname">First Name:</label><br>

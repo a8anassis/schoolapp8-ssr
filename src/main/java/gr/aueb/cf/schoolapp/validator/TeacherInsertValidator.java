@@ -34,9 +34,9 @@ public class TeacherInsertValidator implements Validator {
             errors.rejectValue("vat", "Το ΑΦΜ του καθηγητή υπάρχει ήδη.");
         }
 
-        if (regionRepository.findById(teacherInsertDTO.getRegionId()).isEmpty()) {
-            log.error("Save failed for teacher with vat={}. Region id={} invalid.", teacherInsertDTO.getVat(), teacherInsertDTO.getRegionId());
-            errors.rejectValue("regionId", "Η περιοχή του Καθηγητή δεν μπορεί να είναι κενή.");
-        }
+//        if (regionRepository.findById(teacherInsertDTO.getRegionId()).isEmpty()) {
+//            log.error("Save failed for teacher with vat={}. Region id={} invalid.", teacherInsertDTO.getVat(), teacherInsertDTO.getRegionId());
+//            errors.rejectValue("regionId", "Η περιοχή του Καθηγητή δεν μπορεί να είναι κενή.");
+//        }
     }
 }

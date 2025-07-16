@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Teacher</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/trinsert.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header2 :: headerFragment}"></div>
+
+<div class="container mt-4">
+    <h2>Edit Teacher</h2>
+
+    <form th:action="@{/school/teachers/edit}" th:object="${teacherEditDTO}" method="post">
+        <input type="hidden" th:field="*{uuid}">
+
+        <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" th:field="*{firstname}">
+            <div class="text-danger" th:if="${#fields.hasErrors('firstname')}"
+                 th:errors="*{firstname}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" th:field="*{lastname}">
+            <div class="text-danger" th:if="${#fields.hasErrors('lastname')}"
+                 th:errors="*{lastname}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">VAT</label>
+            <input type="text" class="form-control" th:field="*{vat}">
+            <div class="text-danger" th:if="${#fields.hasErrors('vat')}"
+                 th:errors="*{vat}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Region</label>
+            <select class="form-select" th:field="*{regionId}">
+                <option value="">Select Region</option>
+                <option th:each="region : ${regions}"
+                        th:value="${region.id}"
+                        th:text="${region.name}"
+                        th:selected="${region.id == teacherEditDTO.regionId}">
+                </option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('regionId')}"
+                 th:errors="*{regionId}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a th:href="@{/school/teachers}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+<div th:replace="~{fragments/footer :: footerFragment}"></div>
+</body>
+</html>

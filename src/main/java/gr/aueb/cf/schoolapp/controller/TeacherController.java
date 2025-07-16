@@ -17,22 +17,25 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/school/teachers")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class TeacherController {
 
     private final ITeacherService teacherService;
     private final RegionRepository regionRepository;
     private final Mapper mapper;
 
-//    @Autowired
-//    public TeacherController(RegionRepository regionRepository) {
-//        this.regionRepository = regionRepository;
-//    }
+    @Autowired
+    public TeacherController(ITeacherService teacherService, RegionRepository regionRepository, Mapper mapper) {
+        this.teacherService = teacherService;
+        this.regionRepository = regionRepository;
+        this.mapper = mapper;
+    }
 
     @GetMapping("/insert")
     public String getTeacherForm(Model model) {
@@ -41,6 +44,7 @@ public class TeacherController {
         return "teacher-form";
     }
 
+    @PostMapping("/insert")
     public String saveTeacher(@Valid @ModelAttribute("teacherInsertDTO") TeacherInsertDTO teacherInsertDTO,
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
@@ -55,8 +59,6 @@ public class TeacherController {
             savedTeacher = teacherService.saveTeacher(teacherInsertDTO);
             TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(savedTeacher);
             redirectAttributes.addFlashAttribute("teacher", readOnlyDTO);
-            // The Post-Redirect-Get (PRG) pattern είναι ένα web development pattern
-            // το οποίο εμποδίζει τα duplicate submissions κάνοντας redirect μετά από ένα POST
             return "redirect:/school/teachers";
         } catch (EntityAlreadyExistsException | EntityInvalidArgumentException e) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));

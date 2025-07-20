@@ -58,7 +58,7 @@ public class TeacherController {
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         Teacher savedTeacher;
 
-        // teacherInsertValidator.validate(teacherInsertDTO, bindingResult);
+        teacherInsertValidator.validate(teacherInsertDTO, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));

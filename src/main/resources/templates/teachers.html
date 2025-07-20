@@ -119,22 +119,22 @@
 
 <div class="pagination-controls">
     <!-- Link to first page (disabled if already on the first page) -->
-    <a th:if="${currentPage > 0}" th:href="@{/school/teachers/view(page=0, size=${teachersPage.size})}">&laquo; First</a>
+    <a th:if="${currentPage > 0}" th:href="@{/school/teachers(page=0, size=${teachersPage.size})}">&laquo; First</a>
     <span th:if="${currentPage == 0}" class="disabled">&laquo; First</span>
 
     <!-- Link to previous page (disabled if already on the first page) -->
-    <a th:if="${currentPage > 0}" th:href="@{/school/teachers/view(page=${currentPage - 1}, size=${teachersPage.size})}">&lsaquo; Prev</a>
+    <a th:if="${currentPage > 0}" th:href="@{/school/teachers(page=${currentPage - 1}, size=${teachersPage.size})}">&lsaquo; Prev</a>
     <span th:if="${currentPage == 0}" class="disabled">&lsaquo; Prev</span>
 
     <!-- Display current page / total pages -->
     <span th:text="${currentPage + 1} + ' / ' + ${totalPages}"></span>
 
     <!-- Link to next page (disabled if on the last page) -->
-    <a th:if="${currentPage + 1 < totalPages}" th:href="@{/school/teachers/view(page=${currentPage + 1}, size=${teachersPage.size})}">Next &rsaquo;</a>
+    <a th:if="${currentPage + 1 < totalPages}" th:href="@{/school/teachers(page=${currentPage + 1}, size=${teachersPage.size})}">Next &rsaquo;</a>
     <span th:if="${currentPage + 1 == totalPages}" class="disabled">Next &rsaquo;</span>
 
     <!-- Link to last page (disabled if already on the last page) -->
-    <a th:if="${currentPage + 1 < totalPages}" th:href="@{/school/teachers/view(page=${totalPages - 1}, size=${teachersPage.size})}">Last &raquo;</a>
+    <a th:if="${currentPage + 1 < totalPages}" th:href="@{/school/teachers(page=${totalPages - 1}, size=${teachersPage.size})}">Last &raquo;</a>
     <span th:if="${currentPage + 1 == totalPages}" class="disabled">Last &raquo;</span>
 </div>
 

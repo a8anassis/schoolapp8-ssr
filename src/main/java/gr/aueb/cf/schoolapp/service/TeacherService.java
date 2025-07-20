@@ -24,7 +24,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j  // log
+@Slf4j
 public class TeacherService implements ITeacherService {
 
 
@@ -76,38 +76,29 @@ public class TeacherService implements ITeacherService {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public Teacher updateTeacher(TeacherEditDTO dto)
+    public void updateTeacher(TeacherEditDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException, EntityNotFoundException {
-
         try {
-
             Teacher teacher = teacherRepository.findByUuid(dto.getUuid())
                     .orElseThrow(() -> new EntityNotFoundException("Teacher", "Teacher not found"));
-
             if (!teacher.getVat().equals(dto.getVat())) {
                 if (teacherRepository.findByVat(dto.getVat()).isEmpty()) {
                     teacher.setVat(dto.getVat());
                 } else throw new EntityAlreadyExistsException("Teacher", "Teacher with vat " + dto.getVat() + " already exists");
             }
-
             teacher.setFirstname(dto.getFirstname());
             teacher.setLastname(dto.getLastname());
-
             if (!Objects.equals(teacher.getRegion().getId(), dto.getRegionId())) {
                 Region region = regionRepository.findById(dto.getRegionId())
                         .orElseThrow(() -> new EntityInvalidArgumentException("Region", "Invalid region id"));
-
                 Region currentRegion = teacher.getRegion();
                 if (currentRegion != null) {
-                    //currentRegion.removeTeacher(teacher);   // TBD
+                    currentRegion.removeTeacher(teacher);   // TBD
                 }
-
                 region.addTeacher(teacher);
             }
-
             teacherRepository.save(teacher);
             log.info("Teacher with vat={} updated.", dto.getVat());
-            return teacher;
         } catch (EntityNotFoundException e) {
             log.error("Update failed for teacher with vat={}. Entity not found.", dto.getVat(), e);
             throw e;

@@ -23,9 +23,10 @@
         <div th:if="${errorMessage}" class="error">
             <p th:text="${errorMessage}"></p>
         </div>
+
         <form method="POST" th:object="${teacherInsertDTO}">
             <div class="row">
-                <div>
+                <div class="col-lg-6">
                     <label for="firstname">First Name:</label><br>
                     <input type="text" id="firstname" th:field="*{firstname}"/>
                     <div th:if="${#fields.hasErrors('firstname')}">
@@ -33,7 +34,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="col-lg-6">
                     <label for="lastname">Lastname Name:</label><br>
                     <input type="text" id="lastname" th:field="*{lastname}"/>
                     <div th:if="${#fields.hasErrors('lastname')}">
@@ -41,7 +42,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="col-lg-6">
                     <label for="vat">Vat: </label><br>
                     <input type="text" id="vat" th:field="*{vat}"/>
                     <div th:if="${#fields.hasErrors('vat')}">
@@ -49,7 +50,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="col-lg-6">
                     <label for="region">Region:</label><br>
                     <select name="" id="region" th:field="*{regionId}">
                         <option value="" selected>Select Region</option>
@@ -59,10 +60,7 @@
                         <p th:classappend="${#fields.hasErrors('regionId')} ? 'error'" th:errors="*{regionId}"></p>
                     </div>
                 </div>
-
-                </div>
             </div>
-
 
             <div class="row">
                 <button type="submit" class="custom-button-green">Save Teacher</button>

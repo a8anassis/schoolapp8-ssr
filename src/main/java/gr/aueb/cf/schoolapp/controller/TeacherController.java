@@ -11,6 +11,7 @@ import gr.aueb.cf.schoolapp.model.Teacher;
 import gr.aueb.cf.schoolapp.repository.RegionRepository;
 import gr.aueb.cf.schoolapp.repository.TeacherRepository;
 import gr.aueb.cf.schoolapp.service.ITeacherService;
+import gr.aueb.cf.schoolapp.validator.TeacherEditValidator;
 import gr.aueb.cf.schoolapp.validator.TeacherInsertValidator;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ public class TeacherController {
     private final TeacherRepository teacherRepository;
     private final Mapper mapper;
     private final TeacherInsertValidator teacherInsertValidator;
+    private final TeacherEditValidator teacherEditValidator;
 
 
 //    @Autowired
@@ -56,7 +58,7 @@ public class TeacherController {
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         Teacher savedTeacher;
 
-        teacherInsertValidator.validate(teacherInsertDTO, bindingResult);
+        // teacherInsertValidator.validate(teacherInsertDTO, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
@@ -65,9 +67,12 @@ public class TeacherController {
 
         try {
             savedTeacher = teacherService.saveTeacher(teacherInsertDTO);
-            TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(savedTeacher);
-            redirectAttributes.addFlashAttribute("teacher", readOnlyDTO);
-            return "redirect:/school/teachers/view";
+            // If we wanted to respond with a success page with teacher details,
+            // then we would need the following in comments. Otherwise, if no success page
+            // we can just redirect to teachers view
+//            TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(savedTeacher);
+//            redirectAttributes.addFlashAttribute("teacher", readOnlyDTO);
+            return "redirect:/school/teachers";
         } catch (EntityAlreadyExistsException | EntityInvalidArgumentException e) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
             model.addAttribute("errorMessage", e.getMessage());
@@ -75,8 +80,9 @@ public class TeacherController {
         }
     }
 
-    @GetMapping("/view")
-    public String getPaginatedTeachers(
+//    @GetMapping("/view")
+@GetMapping
+public String getPaginatedTeachers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             Model model) {
@@ -97,7 +103,7 @@ public class TeacherController {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
             return "teacher-edit-form";
         } catch (EntityNotFoundException e) {
-            log.error("Teacher with uuid={} not updated", uuid, e);
+            log.error("Teacher with uuid={} was not found.", uuid, e);
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
             model.addAttribute("errorMessage", e.getMessage());
             return "teacher-edit-form";
@@ -106,10 +112,10 @@ public class TeacherController {
 
     @PostMapping("/edit")
     public String updateTeacher(@Valid @ModelAttribute("teacherEditDTO") TeacherEditDTO teacherEditDTO,
-                              BindingResult bindingResult, Model model) {
+                              BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         Teacher updatedTeacher;
 
-        // teacherInsertValidator.validate(teacherInsertDTO, bindingResult);
+        teacherInsertValidator.validate(teacherEditDTO, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
@@ -117,17 +123,21 @@ public class TeacherController {
         }
 
         try {
-            updatedTeacher = teacherService.updateTeacher(teacherEditDTO);
-            TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(updatedTeacher);
+            teacherService.updateTeacher(teacherEditDTO);
+
+            // If we wanted to respond with a success page with teacher details,
+            // then we would need the following in comments, and also need from the service to
+            // send back the updated teacher. Otherwise, if no success page
+            // we can just redirect to teachers view,
+
+            //TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(updatedTeacher);
             //redirectAttributes.addFlashAttribute("teacher", readOnlyDTO);
-            model.addAttribute("teacher", mapper.mapToTeacherReadOnlyDTO(updatedTeacher));
-            return "/school/teachers/view";
+
+            return "redirect:/school/teachers";
         } catch (EntityAlreadyExistsException | EntityInvalidArgumentException | EntityNotFoundException e) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
             model.addAttribute("errorMessage", e.getMessage());
             return "teacher-edit-form";
         }
     }
-
-
 }

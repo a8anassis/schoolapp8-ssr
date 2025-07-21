@@ -17,4 +17,6 @@ public interface ITeacherService {
 
     void updateTeacher(TeacherEditDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException, EntityNotFoundException;
+
+    void deleteTeacherByUUID(String uuid) throws EntityNotFoundException;
 }

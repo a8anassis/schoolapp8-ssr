@@ -117,4 +117,24 @@ public class TeacherService implements ITeacherService {
         }
     }
 
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public void deleteTeacherByUUID(String uuid) throws EntityNotFoundException {
+        try {
+            Teacher teacher = teacherRepository.findByUuid(uuid)
+                    .orElseThrow(() -> new EntityNotFoundException("Teacher", "Teacher with uuid: " + uuid + " not found"));
+
+            // Αν υπάρχει, κάνε delete με το uuid
+            // Εναλλακτικά για soft delete χρειαζόμαστε πεδίο deleted (Boolean) και deletedAt (LocalDateTime)
+            // Για soft delete κάνουμε setDeleted(true) και save
+            teacherRepository.deleteById(teacher.getId());
+
+            log.info("Teacher with uuid={} deleted.", uuid);
+        } catch (EntityNotFoundException e) {
+            log.error("Delete failed for teacher with uuid={}. Teacher not found.", uuid, e);
+
+            // Rethrow, automatic rollback due to @Transactional
+            throw e;
+        }
+    }
 }

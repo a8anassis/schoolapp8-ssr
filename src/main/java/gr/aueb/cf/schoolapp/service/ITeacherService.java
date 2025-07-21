@@ -12,7 +12,9 @@ import org.springframework.data.domain.Page;
 public interface ITeacherService {
     Teacher saveTeacher(TeacherInsertDTO teacherInsertDTO)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException;
+
     Page<TeacherReadOnlyDTO> getPaginatedTeachers(int page, int size);
+
     void updateTeacher(TeacherEditDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException, EntityNotFoundException;
 }

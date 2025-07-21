@@ -139,4 +139,15 @@ public class TeacherController {
             return "teacher-edit-form";
         }
     }
+
+    @GetMapping("/school/teachers/delete/{uuid}")
+    public String deleteTeacher(@PathVariable String uuid, Model model) {
+        try {
+            teacherService.deleteTeacherByUUID(uuid);
+            return "redirect:/school/teachers";
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "teachers";
+        }
+    }
 }

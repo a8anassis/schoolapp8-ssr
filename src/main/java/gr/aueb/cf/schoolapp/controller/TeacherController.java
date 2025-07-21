@@ -48,7 +48,7 @@ public class TeacherController {
 
     @GetMapping("/insert")
     public String getTeacherForm(Model model) {
-        model.addAttribute("teacherInsertDTO", new TeacherInsertDTO());
+        model.addAttribute("teacherInsertDTO", new TeacherInsertDTO());     // model request scope
         model.addAttribute("regions", regionRepository.findAll(Sort.by("name"))); // PagingAndSortingRepository
         return "teacher-form";
     }
@@ -81,8 +81,8 @@ public class TeacherController {
     }
 
 //    @GetMapping("/view")
-@GetMapping
-public String getPaginatedTeachers(
+    @GetMapping
+    public String getPaginatedTeachers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             Model model) {
@@ -98,7 +98,7 @@ public String getPaginatedTeachers(
     public String showEditForm(@PathVariable String uuid, Model model) {
         try {
             Teacher teacher = teacherRepository.findByUuid(uuid)
-                    .orElseThrow(() -> new EntityNotFoundException("Teacher", "Teacher not found"));
+                    .orElseThrow(() -> new EntityNotFoundException("Teacher", "Teacher not found")); // TBD call service
             model.addAttribute("teacherEditDTO", mapper.mapToTeacherEditDTO(teacher));
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));
             return "teacher-edit-form";
@@ -113,9 +113,8 @@ public String getPaginatedTeachers(
     @PostMapping("/edit")
     public String updateTeacher(@Valid @ModelAttribute("teacherEditDTO") TeacherEditDTO teacherEditDTO,
                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        Teacher updatedTeacher;
 
-        teacherInsertValidator.validate(teacherEditDTO, bindingResult);
+        teacherEditValidator.validate(teacherEditDTO, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));

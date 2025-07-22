@@ -19,7 +19,7 @@ public class TeacherEditDTO {
 //    @NotNull(message = "Το όνομα δεν μπορεί να είναι null.")
 //    @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες.")
     @NotNull
-    @Size(min = 1)
+    @Size(min = 2)
     private String firstname;
 
 //    @NotNull(message = "Το επώνυμο δεν μπορεί να είναι null.")

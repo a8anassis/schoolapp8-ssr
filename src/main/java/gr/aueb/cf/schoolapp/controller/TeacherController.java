@@ -40,10 +40,14 @@ public class TeacherController {
 
 
 //    @Autowired
-//    public TeacherController(ITeacherService teacherService, RegionRepository regionRepository, Mapper mapper) {
+//    public TeacherController(ITeacherService teacherService, RegionRepository regionRepository, TeacherRepository teacherRepository,
+//                             Mapper mapper, TeacherInsertValidator teacherInsertValidator, TeacherEditValidator teacherEditValidator) {
 //        this.teacherService = teacherService;
 //        this.regionRepository = regionRepository;
+//        this.teacherRepository = teacherRepository;
 //        this.mapper = mapper;
+//        this.teacherInsertValidator = teacherInsertValidator;
+//        this.teacherEditValidator = teacherEditValidator;
 //    }
 
     @GetMapping("/insert")
@@ -140,7 +144,7 @@ public class TeacherController {
         }
     }
 
-    @GetMapping("/school/teachers/delete/{uuid}")
+    @GetMapping("/delete/{uuid}")
     public String deleteTeacher(@PathVariable String uuid, Model model) {
         try {
             teacherService.deleteTeacherByUUID(uuid);

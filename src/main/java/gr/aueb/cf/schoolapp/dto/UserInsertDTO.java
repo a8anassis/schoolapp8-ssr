@@ -18,6 +18,7 @@ public class UserInsertDTO {
     @Size(min = 2, max = 20, message = "Το username πρέπει να είναι μεταξύ 2 - 20 χαρακτήρες.")
     private String username;
 
+    @NotNull(message = "Το password δεν μπορεί να είναι null.")
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])^.{8,}$",
             message = "Το password πρέπει να περιέχει τουλάχιστον 1 πεζό, 1 κεφαλαίο, 1 ψηφίο και 1 ειδικό χαρακτήρα χωρίς κενά.")
     private String password;

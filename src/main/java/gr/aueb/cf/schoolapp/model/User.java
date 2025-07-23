@@ -2,10 +2,7 @@ package gr.aueb.cf.schoolapp.model;
 
 import gr.aueb.cf.schoolapp.core.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Table(name = "users")
 public class User extends AbstractEntity implements UserDetails {
 
@@ -34,11 +32,11 @@ public class User extends AbstractEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String username, String password, Role role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
+//    public User(String username, String password, Role role) {
+//        this.username = username;
+//        this.password = password;
+//        this.role = role;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -27,7 +27,12 @@ public class Mapper {
     }
 
     public User mapToUserEntity(UserInsertDTO userInsertDTO) {
-        return new User(userInsertDTO.getUsername(), userInsertDTO.getPassword(),
-                Role.valueOf(userInsertDTO.getRole().toUpperCase()));
+//        return new User(userInsertDTO.getUsername(), userInsertDTO.getPassword(),
+//                Role.valueOf(userInsertDTO.getRole().toUpperCase()));
+        return User.builder()
+                .username(userInsertDTO.getUsername())
+                .password(userInsertDTO.getPassword())
+                .role(Role.valueOf(userInsertDTO.getRole().toUpperCase()))
+                .build();
     }
 }

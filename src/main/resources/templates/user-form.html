@@ -46,12 +46,18 @@
                                 <p th:classappend="${#fields.hasErrors('password')} ? 'error'" th:errors="*{password}"></p>
                             </div>
                         </div>
+<!--                        <div class="mb-4">-->
+<!--                            <label for="role" class="form-label">Role</label>-->
+<!--                            <select class="form-select" th:field="*{role}" id="role" required>-->
+<!--                                <option value="TEACHER">Teacher</option>-->
+<!--                                <option value="STUDENT">Student</option>-->
+<!--                                <option value="ADMIN">Admin</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
                         <div class="mb-4">
                             <label for="role" class="form-label">Role</label>
-                            <select class="form-select" th:field="*{role}" id="role" required>
-                                <option value="TEACHER">Teacher</option>
-                                <option value="STUDENT">Student</option>
-                                <option value="ADMIN">Admin</option>
+                            <select class="form-select" th:field="*{roleId}" id="role" required>
+                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
                             </select>
                         </div>
                         <div class="d-grid gap-2">

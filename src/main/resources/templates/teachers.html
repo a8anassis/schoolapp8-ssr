@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
 <head>
         <link rel="stylesheet" th:href="@{/css/main.css}">
         <link rel="stylesheet" th:href="@{/css/header.css}">
@@ -85,13 +85,13 @@
         <table>
             <thead>
             <tr>
-                <th>ID</th>
+<!--                <th>ID</th>-->
                 <th>UUID</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>VAT</th>
                 <th>Region</th>
-                <th>Actions</th>
+                <th sec:authorize="hasAuthority('EDIT_TEACHERS')">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -104,7 +104,7 @@
                 <td th:text="${teacher.lastname}"></td>
                 <td th:text="${teacher.vat}"></td>
                 <td th:text="${teacher.region}"></td>
-                <td>
+                <td sec:authorize="hasAuthority('EDIT_TEACHERS')">
                     <a th:href="@{/school/teachers/edit/{uuid}(uuid=${teacher.uuid})}"
                        class="btn btn-sm btn-outline-primary">Edit</a>
                     <a th:href="@{/school/teachers/delete/{uuid}(uuid=${teacher.uuid})}"

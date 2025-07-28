@@ -26,7 +26,7 @@ public class Capability {
     private String name;
     private String description;
 
-    @ManyToMany(mappedBy = "capabilities", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "capabilities", fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     // Helper Methods

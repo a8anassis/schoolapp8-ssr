@@ -15,6 +15,6 @@ public class LoginController {
 
     @GetMapping("/")
     public String root(Principal principal) {
-        return principal == null ? "index" : "redirect:/school/teachers";
+        return principal == null ? "index2" : "redirect:/school/teachers";
     }
 }

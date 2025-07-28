@@ -1,6 +1,6 @@
 package gr.aueb.cf.schoolapp.mapper;
 
-import gr.aueb.cf.schoolapp.core.enums.Role;
+//import gr.aueb.cf.schoolapp.core.enums.Role;
 import gr.aueb.cf.schoolapp.dto.TeacherEditDTO;
 import gr.aueb.cf.schoolapp.dto.TeacherInsertDTO;
 import gr.aueb.cf.schoolapp.dto.TeacherReadOnlyDTO;
@@ -32,7 +32,7 @@ public class Mapper {
         return User.builder()
                 .username(userInsertDTO.getUsername())
                 .password(userInsertDTO.getPassword())
-                .role(Role.valueOf(userInsertDTO.getRole().toUpperCase()))
+//                .role(Role.valueOf(userInsertDTO.getRole().toUpperCase()))
                 .build();
     }
 }

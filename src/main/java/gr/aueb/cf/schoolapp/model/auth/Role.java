@@ -29,7 +29,7 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles_capabilities",
             joinColumns = @JoinColumn(name = "role_id"),

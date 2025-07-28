@@ -34,7 +34,7 @@ public class User extends AbstractEntity implements UserDetails {
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne    //(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
 

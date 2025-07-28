@@ -23,6 +23,9 @@ public class UserInsertDTO {
             message = "Το password πρέπει να περιέχει τουλάχιστον 1 πεζό, 1 κεφαλαίο, 1 ψηφίο και 1 ειδικό χαρακτήρα χωρίς κενά.")
     private String password;
 
+//    @NotNull(message = "Ο ρόλος δεν μπορεί να είναι κενός")
+//    private String role;
+
     @NotNull(message = "Ο ρόλος δεν μπορεί να είναι κενός")
-    private String role;
+    private Long roleId;
 }

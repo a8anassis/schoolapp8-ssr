@@ -77,7 +77,7 @@
 <div class="main-content">
     <h1 class="page-title">Teachers Management</h1>
 
-    <div class="action-buttons">
+    <div sec:authorize="hasAuthority('EDIT_TEACHERS')" class="action-buttons">
         <a th:href="@{/school/teachers/insert}" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Insert Teacher
         </a>
@@ -98,7 +98,7 @@
     <!--        sec:authorize="hasRole('ADMIN')-->
             <!-- Iterate over the content of the current page -->
             <tr th:each="teacher : ${teachersPage.content}">
-                <td th:text="${teacher.id}"></td>
+<!--                <td th:text="${teacher.id}"></td>-->
                 <td th:text="${teacher.uuid}"></td>
                 <td th:text="${teacher.firstname}"></td>
                 <td th:text="${teacher.lastname}"></td>

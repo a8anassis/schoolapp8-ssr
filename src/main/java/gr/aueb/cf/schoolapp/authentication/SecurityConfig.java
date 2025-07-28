@@ -21,12 +21,12 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "index.html").permitAll()
+                        .requestMatchers("/", "/index2.html").permitAll()
                         .requestMatchers("/school/users/register").permitAll()
                         .requestMatchers("/school/teachers/insert").hasAuthority("EDIT_TEACHERS")
                         .requestMatchers(HttpMethod.GET, "/school/teachers/edit/{uuid}").hasAuthority("EDIT_TEACHERS")
                         .requestMatchers(HttpMethod.POST, "/school/teachers/edit").hasAuthority("EDIT_TEACHERS")
-                        .requestMatchers(HttpMethod.GET, "/school/teachers/delete/{uuid").hasAuthority("EDIT_TEACHERS")
+                        .requestMatchers(HttpMethod.GET, "/school/teachers/delete/{uuid}").hasAuthority("EDIT_TEACHERS")
                         .requestMatchers("/school/teachers/**").hasAnyRole("ADMIN", "TEACHERS_ADMIN")
                         .requestMatchers("/school/admin/**").hasRole("ADMIN")
                         .requestMatchers("/css/**").permitAll()

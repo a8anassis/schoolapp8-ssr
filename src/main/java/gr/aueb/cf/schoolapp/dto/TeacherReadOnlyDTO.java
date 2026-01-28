@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -14,8 +15,10 @@ import java.time.LocalDateTime;
 @Setter
 public class TeacherReadOnlyDTO {
     private Long id;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+//    private LocalDateTime createdAt;
+//    private LocalDateTime updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
     private String uuid;
     private String firstname;
     private String lastname;

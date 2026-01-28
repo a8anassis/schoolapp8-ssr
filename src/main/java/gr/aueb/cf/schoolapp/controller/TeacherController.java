@@ -74,8 +74,8 @@ public class TeacherController {
             // If we wanted to respond with a success page with teacher details,
             // then we would need the following in comments. Otherwise, if no success page
             // we can just redirect to teachers view
-//            TeacherReadOnlyDTO readOnlyDTO = mapper.mapToTeacherReadOnlyDTO(savedTeacher);
-//            redirectAttributes.addFlashAttribute("teacher", readOnlyDTO);
+//            String teacherUuid = savedTeacher.getUuid();
+//            return "redirect:/school/teachers/success"; // "redirect:/school/teachers/success?teacherUuid=" + teacherUuid;
             return "redirect:/school/teachers";
         } catch (EntityAlreadyExistsException | EntityInvalidArgumentException e) {
             model.addAttribute("regions", regionRepository.findAll(Sort.by("name")));

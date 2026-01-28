@@ -24,12 +24,10 @@ public abstract class AbstractEntity {
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "DATETIME")
-//    private LocalDateTime createdAt;
     private Instant createdAt;
 
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false, columnDefinition = "DATETIME")
-//    private LocalDateTime updatedAt;
     private Instant updatedAt;
 }
 

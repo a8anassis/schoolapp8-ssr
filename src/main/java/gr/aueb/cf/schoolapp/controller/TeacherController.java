@@ -144,7 +144,7 @@ public class TeacherController {
         }
     }
 
-    @GetMapping("/delete/{uuid}")
+    @PostMapping("/delete/{uuid}")
     public String deleteTeacher(@PathVariable String uuid, Model model) {
         try {
             teacherService.deleteTeacherByUUID(uuid);

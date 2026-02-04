@@ -11,7 +11,7 @@ import gr.aueb.cf.schoolapp.model.Teacher;
 import gr.aueb.cf.schoolapp.model.static_data.Region;
 import gr.aueb.cf.schoolapp.repository.RegionRepository;
 import gr.aueb.cf.schoolapp.repository.TeacherRepository;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -44,7 +45,8 @@ public class TeacherService implements ITeacherService {
 //    }
 
     @Override
-    @Transactional(rollbackOn = { EntityInvalidArgumentException.class, EntityAlreadyExistsException.class })
+//    @Transactional(rollbackOn = { EntityInvalidArgumentException.class, EntityAlreadyExistsException.class })
+    @Transactional(rollbackFor = { EntityInvalidArgumentException.class, EntityAlreadyExistsException.class })
     public Teacher saveTeacher(TeacherInsertDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException {
         try {
@@ -70,7 +72,7 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<TeacherReadOnlyDTO> getPaginatedTeachers(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Teacher> teacherPage = teacherRepository.findAll(pageable);
@@ -79,7 +81,7 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional(rollbackFor = { EntityInvalidArgumentException.class, EntityAlreadyExistsException.class })
     public void updateTeacher(TeacherEditDTO dto)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException, EntityNotFoundException {
         try {
@@ -118,7 +120,7 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional(rollbackFor = EntityNotFoundException.class)
     public void deleteTeacherByUUID(String uuid) throws EntityNotFoundException {
         try {
             Teacher teacher = teacherRepository.findByUuid(uuid)

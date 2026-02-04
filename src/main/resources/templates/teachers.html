@@ -13,7 +13,7 @@
         }
 
         .teacher-table {
-            width: 90vw;
+            width: 95vw;
             margin: 20px auto;
             border: 1px solid #dee2e6;
             border-collapse: collapse;
@@ -107,9 +107,15 @@
                 <td sec:authorize="hasAuthority('EDIT_TEACHERS')">
                     <a th:href="@{/school/teachers/edit/{uuid}(uuid=${teacher.uuid})}"
                        class="btn btn-sm btn-outline-primary">Edit</a>
-                    <a th:href="@{/school/teachers/delete/{uuid}(uuid=${teacher.uuid})}"
-                       class="btn btn-sm btn-outline-danger"
-                       onclick="return confirm('Delete this teacher?')">Delete</a>
+<!--                    <a th:href="@{/school/teachers/delete/{uuid}(uuid=${teacher.uuid})}"-->
+<!--                       class="btn btn-sm btn-outline-danger"-->
+<!--                       onclick="return confirm('Delete this teacher?')">Delete</a>-->
+                    <form th:action="@{/school/teachers/delete/{uuid}(uuid=${teacher.uuid})}"
+                          method="post"
+                          class="d-inline"
+                          onsubmit="return confirm('Delete?')">
+                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

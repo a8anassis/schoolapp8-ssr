@@ -30,7 +30,7 @@
                     <label for="firstname">First Name:</label><br>
                     <input type="text" id="firstname" th:field="*{firstname}"/>
                     <div th:if="${#fields.hasErrors('firstname')}">
-                        <p th:classappend="${#fields.hasErrors('firstname')} ? 'error'" th:errors="*{firstname}"></p>
+                        <p class="error" th:errors="*{firstname}"></p>
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
                     <label for="lastname">Lastname Name:</label><br>
                     <input type="text" id="lastname" th:field="*{lastname}"/>
                     <div th:if="${#fields.hasErrors('lastname')}">
-                        <p  th:classappend="${#fields.hasErrors('lastname')} ? 'error'" th:errors="*{lastname}"></p>
+                        <p class="error" th:errors="*{lastname}"></p>
                     </div>
                 </div>
 
@@ -46,18 +46,18 @@
                     <label for="vat">Vat: </label><br>
                     <input type="text" id="vat" th:field="*{vat}"/>
                     <div th:if="${#fields.hasErrors('vat')}">
-                        <p th:classappend="${#fields.hasErrors('vat')} ? 'error'" th:errors="*{vat}"></p>
+                        <p class="error" th:errors="*{vat}"></p>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
-                    <label for="region">Region:</label><br>
-                    <select name="" id="region" th:field="*{regionId}">
+                    <label th:for="*{regionId}">Region:</label><br>
+                    <select th:field="*{regionId}">
                         <option value="" selected>Select Region</option>
-                        <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
+                        <option th:each="region : ${regionsDTO}" th:value="${region.id}" th:text="${region.name}"></option>
                     </select>
                     <div th:if="${#fields.hasErrors('regionId')}">
-                        <p th:classappend="${#fields.hasErrors('regionId')} ? 'error'" th:errors="*{regionId}"></p>
+                        <p class="error" th:errors="*{regionId}"></p>
                     </div>
                 </div>
             </div>

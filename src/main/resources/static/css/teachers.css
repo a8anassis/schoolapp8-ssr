@@ -16,9 +16,77 @@ h1 {
     text-align: center;
 }
 
-.pagination-controls {
+/*.pagination-controls {
     width: 90%;
     margin-top: 15px;
     list-style-type: none;
     text-align: center;
+}*/
+
+.pagination-controls {
+    width: 90%;
+    margin: 20px auto;
+    text-align: center;
 }
+
+.pagination-controls .page-item.active .page-link {
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
+
+.pagination-controls .page-link {
+    color: var(--dark-blue);
+}
+
+.page-title {
+    text-align: center;
+    margin: 30px 0;
+    color: var(--dark-blue);
+}
+
+.action-buttons {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+/*
+:root {
+    --dark-blue: #1a237e;
+}
+
+.teacher-table {
+    width: 95vw;
+    margin: 20px auto;
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-table thead th {
+    background: var(--dark-blue);
+    color: #fff;
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+.teacher-table tbody td {
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+}
+
+.teacher-table tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+.teacher-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+
+
+
+*/
